@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <title>Scheduler</title>
+</head>
+<body>
+    <div class="days">
+        <p>Sunday</p>
+        <p>Monday</p>
+        <p>Tuesday</p>
+        <p>Wednesday</p>
+        <p>Thursday</p>
+        <p>Friday</p>
+        <p>Saturday</p>
+    </div>
+
+    <div class="container">
+        <div class="main">
+            <div id='SCHEDULES' class="schedules">
+
+            </div>
+            <div class="anacont">
+                <div class="nafarko">
+                    <div class="prog">
+                        <h3>Timing</h3>
+                        <div class="prog-frame">
+                            <div class="progress"></div>
+                            <div class="progress-2"></div>
+                            <p class="pers">80%</p>
+                        </div>
+                    </div>
+                    <div class="set">
+                        <p>Set on: <span>23/3/2023</span></p>
+                    </div>
+                </div>
+                <div class="nabiyu">
+                    <h3>Breif description.</h3>
+                    <div class="brief">
+                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eum dicta ipsa fugit? Nobis vitae delectus dolorum exercitationem, iste laudantium consectetur!</p>
+                    </div>
+                </div>
+
+                <div class="floating">
+                    <input class="ck"  type="checkbox" name="ck" href="#">
+                    <div class="btn">
+                        <i class="fa-solid fa-stop" style="color: #554d7e;"></i>
+                    </div>
+                    <div class="comp">
+                        <i class="fa-solid fa-check" style="color: #927fbf;"></i>
+                    </div>
+                    <div class="modi">
+                        <i class="fa-solid fa-pen" style="color: #927fbf;"></i>
+                    </div>
+                    <div class="delete">
+                        <i class="fa-solid fa-trash" style="color: #927fbf;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="side-bar">
+            <div class="create">
+                <p>Create a new schedule....</p>
+            </div>
+            <label for="bame">Name of the schedule</label>
+            <br>
+            <input type="text" id="bame">
+            <label for="date">Select a date</label>
+            <br>
+            <input type="date" id="date">
+            <label for="reminder">Select reminder type</label>
+            <br>
+            <select name="remi" id="reminder">
+                <option value="pop-up">Pop-Up</option>
+                <option value="alarm">Alarm</option>
+            </select>
+            <label class="label-imp" style=" font-size: 18px; margin-bottom: 1rem;" for="imp">Mark as important</label>
+            <input class="imp" type="checkbox" name="imp" id="imp">
+
+            <textarea class="txtarea" name="byn" id="breif-desc" cols="30" rows="10"></textarea>
+
+            <button class="sub" id="kirkir">Create</button>
+        </div>
+    </div>
+    <div class="limit">
+        <h2>This is a Desktop-based App!!</h2>
+    </div>
+    <script src="index.js"></script>
+    <script src="https://kit.fontawesome.com/45b4f2d63f.js" crossorigin="anonymous"></script>
+</body>
+</html>
