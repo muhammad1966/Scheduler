@@ -1,22 +1,41 @@
 const initApp = ()=>{
-    const name = document.getElementById('name');
+    const name = document.getElementById('bame');
     const date = document.getElementById('date');
-    const desc = document.getElementById('breif-desc');
+    const descWrite = document.getElementById('breif-desc')
+    const desc = document.getElementById('Sdescriptions');
     const create = document.getElementById('kirkir');
 
     /*This is the object that conatain all the schedules*/
     let scheds = [{
         schedName: 'collecting money',
         schedDate: '23/3/2024',
-        id: '1'
+        id: '1',
+        description: 'gonna collect all the money today'
     },
 
     {
         schedName: 'Going to mosque',
         schedDate: '29/12/2024',
-        id: '2'
+        id: '2',
+        description: 'going to the mosque for the jumaat'
     }
     ];
+
+
+    const Push = ()=>{
+        scheds.push({
+            schedName: name.value,
+            schedDate: date.value,
+            id:scheds.length + 1,
+            description: descWrite.value
+            });
+        localStorage.setItem('schedules', JSON.stringify(scheds));
+        render();
+    }
+
+    create.addEventListener('click', Push)
+    
+
 
     localStorage.setItem('schedules', JSON.stringify(scheds))
 
@@ -27,9 +46,15 @@ const initApp = ()=>{
         const MAIN = document.getElementById('SCHEDULES');
         MAIN.innerHTML = ''; 
 
+        const Put = (index)=>{
+            desc.innerText = SCD[index].description;
+
+        }
+
         SCD.forEach((item, index) => {
             const indSched = document.createElement('div');
             indSched.classList.add('sched');
+            indSched.addEventListener('click', ()=>{Put(index)})
             
             const description = document.createElement('div');
             description.classList.add('desc');
@@ -54,7 +79,8 @@ const initApp = ()=>{
             DaTeP.innerText = item.schedDate;
             DaTe.appendChild(DaTeP);
 
-            // Append all elements to their respective parents
+
+            // Appending all the elements to their respective parents
             description.appendChild(schedNameD);
             description.appendChild(ico);
             indSched.appendChild(description);
@@ -65,6 +91,9 @@ const initApp = ()=>{
 
 
     render()
+
+   
+
 }
 
 document.addEventListener('DOMContentLoaded', initApp)
