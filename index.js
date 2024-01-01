@@ -21,37 +21,25 @@ const initApp = ()=>{
     }
     ];
 
-
-    const Push = ()=>{
-        scheds.push({
-            schedName: name.value,
-            schedDate: date.value,
-            id:scheds.length + 1,
-            description: descWrite.value
-            });
-        localStorage.setItem('schedules', JSON.stringify(scheds));
-        render();
+    if (localStorage.getItem('schedules')) {
+        scheds = JSON.parse(localStorage.getItem('schedules'));
     }
 
-    create.addEventListener('click', Push)
-    
 
 
     localStorage.setItem('schedules', JSON.stringify(scheds))
 
     
     const render = () => {
-        const SCD = JSON.parse(localStorage.getItem('schedules'));
-
         const MAIN = document.getElementById('SCHEDULES');
         MAIN.innerHTML = ''; 
 
         const Put = (index)=>{
-            desc.innerText = SCD[index].description;
+            desc.innerText = scheds[index].description;
 
         }
 
-        SCD.forEach((item, index) => {
+        scheds.forEach((item, index) => {
             const indSched = document.createElement('div');
             indSched.classList.add('sched');
             indSched.addEventListener('click', ()=>{Put(index)})
@@ -88,6 +76,20 @@ const initApp = ()=>{
             MAIN.appendChild(indSched);
         });
     };
+
+
+    const Push = ()=>{
+        scheds.push({
+            schedName: name.value,
+            schedDate: date.value,
+            id:scheds.length + 1,
+            description: descWrite.value
+            });
+        localStorage.setItem('schedules', JSON.stringify(scheds));
+        render();
+    }
+
+    create.addEventListener('click', Push)
 
 
     render()
