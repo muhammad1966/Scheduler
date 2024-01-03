@@ -4,19 +4,20 @@ const initApp = ()=>{
     const descWrite = document.getElementById('breif-desc')
     const desc = document.getElementById('Sdescriptions');
     const create = document.getElementById('kirkir');
+    const trash = document.getElementById('trash');
 
     /*This is the object that conatain all the schedules*/
     let scheds = [{
         schedName: 'collecting money',
         schedDate: '23/3/2024',
-        id: '1',
+        id: 1,
         description: 'gonna collect all the money today'
     },
 
     {
         schedName: 'Going to mosque',
         schedDate: '29/12/2024',
-        id: '2',
+        id: 2,
         description: 'going to the mosque for the jumaat'
     }
     ];
@@ -29,20 +30,28 @@ const initApp = ()=>{
 
     localStorage.setItem('schedules', JSON.stringify(scheds))
 
+    let id = 0;
+    
+
+    
+
     
     const render = () => {
         const MAIN = document.getElementById('SCHEDULES');
         MAIN.innerHTML = ''; 
-
+ 
         const Put = (index)=>{
             desc.innerText = scheds[index].description;
-
+    
         }
-
+        
         scheds.forEach((item, index) => {
             const indSched = document.createElement('div');
             indSched.classList.add('sched');
-            indSched.addEventListener('click', ()=>{Put(index)})
+            indSched.addEventListener('click', ()=>{
+                Put(index)
+                id = scheds[index].id
+            })
             
             const description = document.createElement('div');
             description.classList.add('desc');
@@ -76,8 +85,9 @@ const initApp = ()=>{
             MAIN.appendChild(indSched);
         });
     };
+    render()
 
-
+    
     const Push = ()=>{
         scheds.push({
             schedName: name.value,
@@ -88,11 +98,27 @@ const initApp = ()=>{
         localStorage.setItem('schedules', JSON.stringify(scheds));
         render();
     }
+    create.addEventListener('click', Push);
 
-    create.addEventListener('click', Push)
+    let check = false;
+
+    
+    const Delete = ()=>{
+        if(check){
+            scheds = scheds.filter((item)=> item.id !== id)
+            localStorage.setItem('schedules', JSON.stringify(scheds));
+            check = false;
+            render()
+        }
+    }
+
+    trash.addEventListener('click',()=>{ 
+        check = true;
+        Delete(id);
+    })
 
 
-    render()
+    
 
    
 
