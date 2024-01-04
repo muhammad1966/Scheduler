@@ -84,7 +84,7 @@ const initApp = ()=>{
  
         const Put = (index)=>{
             desc.innerText = scheds[index].description;
-            set_on.innerText = scheds[index].schedDate;
+            set_on.innerText = scheds[index].setDate;
     
         }
         
@@ -132,11 +132,21 @@ const initApp = ()=>{
 
     
     const Push = ()=>{
+        let getTodayDate = ()=> {
+            const today = new Date();
+            const day = String(today.getDate()).padStart(2, '0');
+            const month = String(today.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+            const year = today.getFullYear();
+          
+            return `${year}-${month}-${day}`;
+          }
+          const currentDate = getTodayDate();
         scheds.push({
             schedName: name.value,
             schedDate: date.value,
             id:scheds.length + 1,
-            description: descWrite.value
+            description: descWrite.value,
+            setDate: currentDate
             });
         localStorage.setItem('schedules', JSON.stringify(scheds));
         render();
