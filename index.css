@@ -374,6 +374,10 @@ body{
     display: none;
 }
 
+.kamp{
+    color: white;
+}
+
 @media screen and (max-width:1310px) {
     .days{
         display: none;

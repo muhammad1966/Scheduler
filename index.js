@@ -5,6 +5,48 @@ const initApp = ()=>{
     const desc = document.getElementById('Sdescriptions');
     const create = document.getElementById('kirkir');
     const trash = document.getElementById('trash');
+    const set_on = document.getElementById('set-on');
+    const sunday = document.getElementById('sun');
+    const monday = document.getElementById('mon');
+    const tuesday = document.getElementById('tues');
+    const wednesday = document.getElementById('wed');
+    const thursday = document.getElementById('thur');
+    const friday = document.getElementById('fri');
+    const saturday = document.getElementById('sat');
+
+    function getCurrentDayName() {
+        const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        const today = new Date().getDay();
+        return daysOfWeek[today];
+      }
+      
+      const currentDay = getCurrentDayName();
+      
+      if(currentDay == 'Sunday'){
+        sunday.classList.add('kamp')
+      }
+      else if(currentDay == 'Monday'){
+        monday.classList.add('kamp')
+      }
+      else if(currentDay == 'Tuesday'){
+        tueday.classList.add('kamp')
+      }
+      else if(currentDay == 'Wednesday'){
+        wednesday.classList.add('kamp')
+      }
+      else if(currentDay == 'Thursday'){
+        thursday.classList.add('kamp')
+      }
+      else if(currentDay == 'Friday'){
+        friday.classList.add('kamp')
+      }
+      else if(currentDay == 'Saturday'){
+        saturday.classList.add('kamp')
+      }
+      else{
+        return null
+      }
+      
 
     /*This is the object that conatain all the schedules*/
     let scheds = [{
@@ -42,6 +84,7 @@ const initApp = ()=>{
  
         const Put = (index)=>{
             desc.innerText = scheds[index].description;
+            set_on.innerText = scheds[index].schedDate;
     
         }
         
@@ -103,7 +146,7 @@ const initApp = ()=>{
     let check = false;
 
     
-    const Delete = ()=>{
+    const Delete = ()=>{ 
         if(check){
             scheds = scheds.filter((item)=> item.id !== id)
             localStorage.setItem('schedules', JSON.stringify(scheds));
