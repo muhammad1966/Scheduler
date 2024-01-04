@@ -13,6 +13,7 @@ const initApp = ()=>{
     const thursday = document.getElementById('thur');
     const friday = document.getElementById('fri');
     const saturday = document.getElementById('sat');
+    const comp = document.getElementById('comp');
 
     function getCurrentDayName() {
         const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -73,6 +74,7 @@ const initApp = ()=>{
     localStorage.setItem('schedules', JSON.stringify(scheds))
 
     let id = 0;
+    let indSchedId = ''
     
 
     
@@ -91,9 +93,15 @@ const initApp = ()=>{
         scheds.forEach((item, index) => {
             const indSched = document.createElement('div');
             indSched.classList.add('sched');
+            indSched.id = item.id;
+            const schedId = indSched.id
+            if(item.komp){
+                indSched.classList.add('completed')
+            }
             indSched.addEventListener('click', ()=>{
                 Put(index)
                 id = scheds[index].id
+                indSchedId = schedId
             })
             
             const description = document.createElement('div');
@@ -144,9 +152,10 @@ const initApp = ()=>{
         scheds.push({
             schedName: name.value,
             schedDate: date.value,
-            id:scheds.length + 1,
+            id:scheds.length + 1 + '',
             description: descWrite.value,
-            setDate: currentDate
+            setDate: currentDate,
+            komp: false
             });
         localStorage.setItem('schedules', JSON.stringify(scheds));
         render();
@@ -168,6 +177,25 @@ const initApp = ()=>{
     trash.addEventListener('click',()=>{ 
         check = true;
         Delete(id);
+    })
+
+    let completed = false;
+
+    const Complete = ()=>{
+        if(completed){
+            const schedObject = document.getElementById(indSchedId);
+            schedObject.classList.add('completed');
+            let scheds = JSON.parse(localStorage.getItem('schedules'));
+            scheds[id - 1].komp = true;
+            localStorage.setItem('schedules', JSON.stringify(scheds))
+            render()
+            completed = false
+        }
+    }
+
+    comp.addEventListener('click', ()=>{
+        completed = true;
+        Complete()
     })
 
 

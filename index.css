@@ -378,6 +378,10 @@ body{
     color: white;
 }
 
+.completed{
+    opacity: 0.3;
+}
+
 @media screen and (max-width:1310px) {
     .days{
         display: none;
