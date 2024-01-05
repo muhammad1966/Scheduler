@@ -15,6 +15,7 @@ const initApp = ()=>{
     const saturday = document.getElementById('sat');
     const comp = document.getElementById('comp');
     const edit = document.getElementById('edit');
+    const modify = document.getElementById('modify');
 
     function getCurrentDayName() {
         const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -141,13 +142,10 @@ const initApp = ()=>{
 
     
     const Push = ()=>{
-        if(scheds[id - 1] in scheds){
-            Delete(id)
-        }
         let getTodayDate = ()=> {
             const today = new Date();
             const day = String(today.getDate()).padStart(2, '0');
-            const month = String(today.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+            const month = String(today.getMonth() + 1).padStart(2, '0');
             const year = today.getFullYear();
           
             return `${year}-${month}-${day}`;
@@ -210,6 +208,9 @@ const initApp = ()=>{
             name.value = scheds[id - 1].schedName;
             date.value = scheds[id - 1].schedDate;
             descWrite.value = scheds[id - 1].description;
+            create.classList.add('kill')
+            modify.classList.remove('modify')
+            modify.classList.add('modify-on')
             editCheck = false;
         }
     }
@@ -219,6 +220,34 @@ const initApp = ()=>{
         Edit()
     })
 
+    const Modify = ()=>{
+        scheds = scheds.filter((item)=> item.id !== id)
+        let getTodayDate = ()=> {
+            const today = new Date();
+            const day = String(today.getDate()).padStart(2, '0');
+            const month = String(today.getMonth() + 1).padStart(2, '0');
+            const year = today.getFullYear();
+          
+            return `${year}-${month}-${day}`;
+          }
+          const currentDate = getTodayDate();
+        scheds.splice((id - 1), 0, {
+            schedName: name.value,
+            schedDate: date.value,
+            id:scheds.length + 1 + '',
+            description: descWrite.value,
+            setDate: currentDate,
+            komp: false
+            });
+        create.classList.remove('kill')
+        modify.classList.remove('modify-on')
+        modify.classList.add('modify')
+        localStorage.setItem('schedules', JSON.stringify(scheds));
+        render()
+        window.location.reload()
+    }
+
+    modify.addEventListener('click', Modify)
 
     
 

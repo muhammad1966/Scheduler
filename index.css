@@ -129,6 +129,26 @@ body{
     border: none;
 }
 
+.kill{
+    display: none;
+}
+
+.modify{
+    display:none;
+}
+
+.modify-on{
+    width: 100%;
+    padding: 1rem 0;
+    border-radius: 10px;
+    color: var(--text-color);
+    font-family: font;
+    font-size: 22px;
+    background:#fbdefe ;
+    outline: none;
+    border: none;
+}
+
 .create{
     margin-bottom: 3rem;
 }
