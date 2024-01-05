@@ -14,6 +14,7 @@ const initApp = ()=>{
     const friday = document.getElementById('fri');
     const saturday = document.getElementById('sat');
     const comp = document.getElementById('comp');
+    const edit = document.getElementById('edit');
 
     function getCurrentDayName() {
         const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -140,6 +141,9 @@ const initApp = ()=>{
 
     
     const Push = ()=>{
+        if(scheds[id - 1] in scheds){
+            Delete(id)
+        }
         let getTodayDate = ()=> {
             const today = new Date();
             const day = String(today.getDate()).padStart(2, '0');
@@ -176,7 +180,7 @@ const initApp = ()=>{
 
     trash.addEventListener('click',()=>{ 
         check = true;
-        Delete(id);
+        Delete();
     })
 
     let completed = false;
@@ -196,6 +200,23 @@ const initApp = ()=>{
     comp.addEventListener('click', ()=>{
         completed = true;
         Complete()
+    })
+
+    let editCheck = false;
+
+    const Edit = ()=>{
+        if(editCheck){
+            scheds = JSON.parse(localStorage.getItem('schedules'))
+            name.value = scheds[id - 1].schedName;
+            date.value = scheds[id - 1].schedDate;
+            descWrite.value = scheds[id - 1].description;
+            editCheck = false;
+        }
+    }
+
+    edit.addEventListener('click', ()=>{
+        editCheck = true;
+        Edit()
     })
 
 
