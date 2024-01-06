@@ -51,7 +51,7 @@ const initApp = ()=>{
       }
       
 
-    /*This is the object that conatain all the schedules*/
+    
     let scheds = [{
         schedName: 'collecting money',
         schedDate: '2024-2-4',
@@ -84,9 +84,9 @@ const initApp = ()=>{
     
 
     function daysBetweenDates(date1, date2) {
-        const oneDay = 1000 * 60 * 60 * 24; // milliseconds in a day
-        const timeDiff = Math.abs(date2.getTime() - date1.getTime()); // difference in milliseconds
-        const diffDays = Math.ceil(timeDiff / oneDay); // convert difference to days
+        const oneDay = 1000 * 60 * 60 * 24;
+        const timeDiff = Math.abs(date2.getTime() - date1.getTime());
+        const diffDays = Math.ceil(timeDiff / oneDay);
       
         return diffDays;
     }
