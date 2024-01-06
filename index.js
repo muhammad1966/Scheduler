@@ -106,24 +106,26 @@ const initApp = ()=>{
         const MAIN = document.getElementById('SCHEDULES');
         MAIN.innerHTML = ''; 
  
-        const Put = (index)=>{
+        const Put = (index) => {
             desc.innerText = scheds[index].description;
             set_on.innerText = scheds[index].setDate;
-
+        
             const firstDate = new Date(scheds[index].setDate);
-            const secondDate = new Date(getTodayDate());
-            const thirdDate = new Date(scheds[index].schedDate)
-            let daysPast = daysBetweenDates(firstDate, secondDate)
-            let totalSpan = daysBetweenDates(firstDate, thirdDate);
-            let remainDays = totalSpan - daysPast
-            let result = remainDays/100;
-            console.log(result)
-
+            const todayDate = new Date();
+            const scheduledDate = new Date(scheds[index].schedDate);
+          
+            const totalSpan = daysBetweenDates(firstDate, scheduledDate);
+            const daysPast = daysBetweenDates(firstDate, todayDate);
+          
             const progress = document.getElementById('progress');
-            progress.style.width = `${result}%`
-            
-    
-        }
+            const maxProgressBarWidth = 80;
+        
+            const percentage = Math.min(Math.max((daysPast / totalSpan) * 100, 0), 100);
+            const progressWidth = Math.min((percentage * maxProgressBarWidth) / 100, maxProgressBarWidth);
+          
+            progress.style.width = `${progressWidth}%`;
+        };
+        
         
         scheds.forEach((item, index) => {
             const indSched = document.createElement('div');
