@@ -32,7 +32,7 @@ const initApp = ()=>{
         monday.classList.add('kamp')
       }
       else if(currentDay == 'Tuesday'){
-        tueday.classList.add('kamp')
+        tuesday.classList.add('kamp')
       }
       else if(currentDay == 'Wednesday'){
         wednesday.classList.add('kamp')
@@ -54,16 +54,20 @@ const initApp = ()=>{
     /*This is the object that conatain all the schedules*/
     let scheds = [{
         schedName: 'collecting money',
-        schedDate: '23/3/2024',
+        schedDate: '2024-2-4',
         id: 1,
-        description: 'gonna collect all the money today'
+        description: 'gonna collect all the money today',
+        setDate: '2024-1-2',
+        komp: false
     },
 
     {
         schedName: 'Going to mosque',
-        schedDate: '29/12/2024',
+        schedDate: '2024-5-1',
         id: 2,
-        description: 'going to the mosque for the jumaat'
+        description: 'going to the mosque for the jumaat',
+        setDate: '2024-1-2',
+        komp: false
     }
     ];
 
@@ -79,7 +83,23 @@ const initApp = ()=>{
     let indSchedId = ''
     
 
-    
+    function daysBetweenDates(date1, date2) {
+        const oneDay = 1000 * 60 * 60 * 24; // milliseconds in a day
+        const timeDiff = Math.abs(date2.getTime() - date1.getTime()); // difference in milliseconds
+        const diffDays = Math.ceil(timeDiff / oneDay); // convert difference to days
+      
+        return diffDays;
+    }
+
+
+    let getTodayDate = ()=> {
+        const today = new Date();
+        const day = String(today.getDate()).padStart(2, '0');
+        const month = String(today.getMonth() + 1).padStart(2, '0');
+        const year = today.getFullYear();
+      
+        return `${year}-${month}-${day}`;
+      }
 
     
     const render = () => {
@@ -89,6 +109,19 @@ const initApp = ()=>{
         const Put = (index)=>{
             desc.innerText = scheds[index].description;
             set_on.innerText = scheds[index].setDate;
+
+            const firstDate = new Date(scheds[index].setDate);
+            const secondDate = new Date(getTodayDate());
+            const thirdDate = new Date(scheds[index].schedDate)
+            let daysPast = daysBetweenDates(firstDate, secondDate)
+            let totalSpan = daysBetweenDates(firstDate, thirdDate);
+            let remainDays = totalSpan - daysPast
+            let result = remainDays/100;
+            console.log(result)
+
+            const progress = document.getElementById('progress');
+            progress.style.width = `${result}%`
+            
     
         }
         
@@ -140,16 +173,10 @@ const initApp = ()=>{
     };
     render()
 
+
+    
     
     const Push = ()=>{
-        let getTodayDate = ()=> {
-            const today = new Date();
-            const day = String(today.getDate()).padStart(2, '0');
-            const month = String(today.getMonth() + 1).padStart(2, '0');
-            const year = today.getFullYear();
-          
-            return `${year}-${month}-${day}`;
-          }
           const currentDate = getTodayDate();
         scheds.push({
             schedName: name.value,
@@ -247,7 +274,13 @@ const initApp = ()=>{
         window.location.reload()
     }
 
-    modify.addEventListener('click', Modify)
+    modify.addEventListener('click', Modify);
+
+    
+      
+      
+      
+      
 
     
 
