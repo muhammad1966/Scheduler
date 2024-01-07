@@ -118,12 +118,14 @@ const initApp = ()=>{
             const daysPast = daysBetweenDates(firstDate, todayDate);
           
             const progress = document.getElementById('progress');
+            const pass = document.getElementById('pass')
             const maxProgressBarWidth = 80;
         
             const percentage = Math.min(Math.max((daysPast / totalSpan) * 100, 0), 100);
             const progressWidth = Math.min((percentage * maxProgressBarWidth) / 100, maxProgressBarWidth);
           
             progress.style.width = `${progressWidth}%`;
+            pass.innerText = progressWidth % 1 !== 0 ? progressWidth.toFixed(1) + "%": progressWidth + "%"
         };
         
         
