@@ -52,23 +52,7 @@ const initApp = ()=>{
       
 
     
-    let scheds = [{
-        schedName: 'collecting money',
-        schedDate: '2024-2-4',
-        id: 1,
-        description: 'gonna collect all the money today',
-        setDate: '2024-1-2',
-        komp: false
-    },
-
-    {
-        schedName: 'Going to mosque',
-        schedDate: '2024-5-1',
-        id: 2,
-        description: 'going to the mosque for the jumaat',
-        setDate: '2024-1-2',
-        komp: false
-    }
+    let scheds = [
     ];
 
     if (localStorage.getItem('schedules')) {
